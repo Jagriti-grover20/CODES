@@ -1,0 +1,71 @@
+#include <bits/stdc++.h> 
+class Queue {
+public:
+    int r;
+    int f;
+    int size;
+    int *arr;
+    Queue() {
+        // Implement the Constructor
+        f=-1;
+        r=-1;
+        size=5000;
+        arr=new int[size];
+    }
+
+    /*----------------- Public Functions of Queue -----------------*/
+
+    bool isEmpty() {
+       if(f==-1 && r==-1){
+         return true;
+       }
+       return false;
+    }
+
+    void enqueue(int data) {
+        if(f==0 && r==size-1){
+          return;
+        }
+        //first case
+        if(r==-1 && f==-1){
+          r=0;
+          f=0;
+          arr[r]=data;
+          return;
+        }
+        //rest of the cases
+        r++;
+        arr[r]=data;
+    }
+
+    int dequeue() {
+      int ans;
+      //very first case
+        if(f==-1 && r==-1){
+          return -1;
+        }
+        //edge case: deleting(front) before insertion(rear)
+        if(r==f-1){
+         return -1;
+        }
+        //single element
+        if(f==r){
+          ans=arr[f];
+          f=-1,r=-1;
+          return ans;
+        }
+        
+        else{
+          ans = arr[f];
+          f++;
+          return ans;
+        }
+    }
+
+    int front() {
+      if(r==-1 && f==-1){
+        return -1;
+      }
+       return arr[f];
+    }
+};
