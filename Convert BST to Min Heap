@@ -1,0 +1,38 @@
+//https://www.codingninjas.com/codestudio/problems/convert-bst-to-min-heap_920498?leftPanelTab=0
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void inorder(BinaryTreeNode* root, vector<int>& invec) {
+    if (root == NULL) {
+        return;
+    }
+    inorder(root->left, invec);
+    invec.push_back(root->data);
+    inorder(root->right, invec);
+}
+
+
+
+void helper(BinaryTreeNode* root, vector<int>& invec,int& i) {
+    if (root == NULL) {
+        return;
+    }
+  
+    root->data = invec[i];
+	i++;
+    helper(root->left, invec,i);
+    helper(root->right, invec,i);
+}
+
+
+BinaryTreeNode* convertBST(BinaryTreeNode* root) {
+    vector<int> invec;
+    if (root == NULL) {
+        return root;
+    }
+    inorder(root, invec);
+    int i = 0;
+    helper(root, invec,i);
+    return root;
+}
