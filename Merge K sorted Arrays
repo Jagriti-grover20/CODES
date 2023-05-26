@@ -1,0 +1,20 @@
+//https://practice.geeksforgeeks.org/problems/merge-k-sorted-arrays/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab
+class Solution
+{
+    public:
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    {
+        vector<int>v;
+        priority_queue<int,vector<int>,greater<int>>q;
+        for(int i=0;i<k;i++){
+            for(int j=0;j<k;j++){
+                 q.push(arr[i][j]);
+            }
+        }
+       while(!q.empty()){
+           v.push_back(q.top());
+           q.pop();
+       }
+       return v;
+    }
+};
