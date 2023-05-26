@@ -1,0 +1,31 @@
+//https://practice.geeksforgeeks.org/problems/bst-to-max-heap/1
+
+void inorder(Node* root, vector<int>&invec){
+        if(root==NULL)
+        {
+            return;
+        }
+        inorder(root->left,invec);
+        invec.push_back(root->data);
+        inorder(root->right,invec);
+    }
+    int i=0;
+    void helper(Node* root, vector<int>&invec){
+        if(root==NULL){
+            return;
+        }
+        helper(root->left,invec);
+        helper(root->right,invec);
+          //replace the node values with inorder 
+        root->data=invec[i];
+        i++;
+    }
+    void convertToMaxHeapUtil(Node* root)
+    {
+       vector<int>invec;
+       inorder(root,invec);
+       //you got the inorder traversal that is providing us the BST order
+       //now converting bst into heap
+    
+       helper(root,invec);
+    }    
